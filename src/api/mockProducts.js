@@ -1,356 +1,53 @@
-// 40 local products (Adults + Kids) with a clean category taxonomy.
-// Categories:
-// - "women"
-// - "men"
-// - "kids-girls"
-// - "kids-boys"
-
 export const MOCK_CATEGORIES = ['women', 'men', 'kids-girls', 'kids-boys']
 
-function img(seed) {
-  // Stable placeholder image per seed (no local assets required)
-  return `https://picsum.photos/seed/${seed}/800/1000`
-}
-
 function price(n) {
-  // Keep prices realistic; ensure two decimals
   return Math.round(n * 100) / 100
 }
 
 export const MOCK_PRODUCTS = [
   // -------------------------
-  // WOMEN (10)
+  // WOMEN
   // -------------------------
-  {
-    id: 1001,
-    title: 'Women Tailored Blazer - Black',
-    price: price(79.9),
-    category: 'women',
-    description: 'Structured blazer with clean lapels and a modern fit. Designed for day-to-night styling.',
-    image: img('women-1001'),
-  },
-  {
-    id: 1002,
-    title: 'Women Satin Slip Dress - Sand',
-    price: price(59.9),
-    category: 'women',
-    description: 'Minimal slip dress in satin finish. Adjustable straps and a fluid silhouette.',
-    image: img('women-1002'),
-  },
-  {
-    id: 1003,
-    title: 'Women Wide-Leg Trousers - Charcoal',
-    price: price(49.9),
-    category: 'women',
-    description: 'High-rise wide-leg trousers with pressed creases for a polished look.',
-    image: img('women-1003'),
-  },
-  {
-    id: 1004,
-    title: 'Women Ribbed Knit Top - Off White',
-    price: price(24.9),
-    category: 'women',
-    description: 'Rib-knit long-sleeve top with a fitted cut. Soft hand feel and clean finish.',
-    image: img('women-1004'),
-  },
-  {
-    id: 1005,
-    title: 'Women Oversized Shirt - Blue Stripe',
-    price: price(34.9),
-    category: 'women',
-    description: 'Oversized cotton shirt with subtle stripes. Easy to layer or wear alone.',
-    image: img('women-1005'),
-  },
-  {
-    id: 1006,
-    title: 'Women Denim Midi Skirt - Indigo',
-    price: price(44.9),
-    category: 'women',
-    description: 'Denim midi skirt with a front slit. Classic wash with modern proportions.',
-    image: img('women-1006'),
-  },
-  {
-    id: 1007,
-    title: 'Women Cropped Jacket - Ecru',
-    price: price(69.9),
-    category: 'women',
-    description: 'Cropped jacket with clean seams and structured shoulders. Minimal and versatile.',
-    image: img('women-1007'),
-  },
-  {
-    id: 1008,
-    title: 'Women Pleated Skirt - Black',
-    price: price(39.9),
-    category: 'women',
-    description: 'Pleated skirt with a crisp drape and comfortable waistband. Easy movement.',
-    image: img('women-1008'),
-  },
-  {
-    id: 1009,
-    title: 'Women Trench Coat - Beige',
-    price: price(99.9),
-    category: 'women',
-    description: 'Classic trench with belt and storm flap details. Lightweight layering essential.',
-    image: img('women-1009'),
-  },
-  {
-    id: 1010,
-    title: 'Women Minimal Sneakers - White',
-    price: price(54.9),
-    category: 'women',
-    description: 'Clean low-profile sneakers with a minimal upper and everyday comfort.',
-    image: img('women-1010'),
-  },
+  { id: 1001, title: 'Black Blazer', price: price(79.9), category: 'women', description: 'Simple black blazer.', image: 'https://img.freepik.com/free-photo/young-woman-portrait-outdoor-black-wear_624325-3415.jpg?semt=ais_hybrid&w=740&q=80' },
+  { id: 1002, title: 'Slip Dress', price: price(59.9), category: 'women', description: 'Light satin dress.', image: 'https://media2.newlookassets.com/i/newlook/892680810/womens/clothing/lingerie/white-strappy-slip-dress.jpg?strip=true&qlt=50&w=720' },
+  { id: 1003, title: 'Baggy Pants', price: price(49.9), category: 'women', description: 'Loose fit pants.', image: 'https://m.media-amazon.com/images/I/810cMul4pVL._AC_UY1000_.jpg' },
+  { id: 1004, title: 'White Top', price: price(24.9), category: 'women', description: 'Basic white top.', image: 'https://cdn-img.prettylittlething.com/8/b/6/5/8b65c8fc04a17bc77796c758a3ae399948539fbf_CNF0736_1_white_basic_slinky_short_sleeve_crop_top.jpg' },
+  { id: 1005, title: 'Blue Shirt', price: price(34.9), category: 'women', description: 'Oversized shirt.', image: 'https://dtcralphlauren.scene7.com/is/image/PoloGSI/s7-1432681_alternate1?$rl_4x5_pdp$' },
+  { id: 1006, title: 'Denim Skirt', price: price(44.9), category: 'women', description: 'Classic denim skirt.', image: 'https://media2.newlookassets.com/i/newlook/906734740/womens/clothing/skirts/blue-vintage-tint-midi-denim-skirt.jpg?strip=true&qlt=50&w=720' },
+  { id: 1007, title: 'Short Jacket', price: price(69.9), category: 'women', description: 'Cropped jacket.', image: 'https://i5.walmartimages.com/asr/cc9681e4-a645-45bd-b935-10ef7b7a1e6c.d115233c32ec4461be1c228be64cd3ac.jpeg?odnHeight=768&odnWidth=768&odnBg=FFFFFF' },
+  { id: 1008, title: ' Sneakers', price: price(54.9), category: 'women', description: 'Clean sneakers.', image: 'https://www.instyle.com/thmb/AUbfwONfHm2429-czJjk7wVMUb4=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/nike-sneakers-3864e69265d5417687e751c7ba30fc1c.jpg' },
 
   // -------------------------
-  // MEN (10)
+  // MEN
   // -------------------------
-  {
-    id: 2001,
-    title: 'Men Utility Overshirt - Olive',
-    price: price(49.9),
-    category: 'men',
-    description: 'Utility overshirt with chest pockets and a structured feel. Perfect for layering.',
-    image: img('men-2001'),
-  },
-  {
-    id: 2002,
-    title: 'Men Straight Jeans - Dark Blue',
-    price: price(44.9),
-    category: 'men',
-    description: 'Straight-leg denim with a clean dark wash. Everyday fit with modern finish.',
-    image: img('men-2002'),
-  },
-  {
-    id: 2003,
-    title: 'Men Knit Crewneck - Grey',
-    price: price(34.9),
-    category: 'men',
-    description: 'Soft crewneck knit with ribbed trims. Minimal look for daily wear.',
-    image: img('men-2003'),
-  },
-  {
-    id: 2004,
-    title: 'Men Tailored Trousers - Black',
-    price: price(54.9),
-    category: 'men',
-    description: 'Tailored trousers with a tapered leg and clean front. Smart-casual essential.',
-    image: img('men-2004'),
-  },
-  {
-    id: 2005,
-    title: 'Men Minimal Hoodie - Sand',
-    price: price(39.9),
-    category: 'men',
-    description: 'Minimal hoodie with a structured hood and soft interior. Clean branding-free look.',
-    image: img('men-2005'),
-  },
-  {
-    id: 2006,
-    title: 'Men Oxford Shirt - White',
-    price: price(29.9),
-    category: 'men',
-    description: 'Crisp oxford shirt with a classic collar. Versatile for office or weekend.',
-    image: img('men-2006'),
-  },
-  {
-    id: 2007,
-    title: 'Men Lightweight Jacket - Navy',
-    price: price(79.9),
-    category: 'men',
-    description: 'Lightweight jacket with a minimal silhouette. Ideal transitional layer.',
-    image: img('men-2007'),
-  },
-  {
-    id: 2008,
-    title: 'Men Relaxed Tee - Black',
-    price: price(19.9),
-    category: 'men',
-    description: 'Relaxed-fit tee in soft cotton. Clean neckline and modern proportions.',
-    image: img('men-2008'),
-  },
-  {
-    id: 2009,
-    title: 'Men Chinos - Stone',
-    price: price(39.9),
-    category: 'men',
-    description: 'Slim chinos with a clean finish. Comfortable stretch for all-day wear.',
-    image: img('men-2009'),
-  },
-  {
-    id: 2010,
-    title: 'Men Minimal Sneakers - Black',
-    price: price(54.9),
-    category: 'men',
-    description: 'Low-profile sneakers with a minimal upper and everyday comfort.',
-    image: img('men-2010'),
-  },
+  { id: 2001, title: 'Overshirt', price: price(49.9), category: 'men', description: 'Light overshirt.', image: 'https://icon-amsterdam.com/cdn/shop/files/1_5986866c-7669-4ec9-baef-419eb21795d1_large.webp?v=1730122587' },
+  { id: 2002, title: 'Blue Jeans', price: price(44.9), category: 'men', description: 'Straight jeans.', image: 'https://m.media-amazon.com/images/I/81jO8l9TkiL._AC_UF894,1000_QL80_.jpg' },
+  { id: 2003, title: 'Grey Sweater', price: price(34.9), category: 'men', description: 'Soft knit sweater.', image: 'https://images-static.nykaa.com/media/catalog/product/b/a/babcc29268310_1.jpg?tr=w-500' },
+  { id: 2004, title: 'Black Pants', price: price(54.9), category: 'men', description: 'Tailored pants.', image: 'https://www.hollomen.com/cdn/shop/files/Men_sTailoredGraySlim-FitDressPants_3.jpg?v=1736125641&width=1445' },
+  { id: 2005, title: 'Hoodie', price: price(39.9), category: 'men', description: 'Simple hoodie.', image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJbWYl1l0lhyJu18LPcFbos4oiWYXWqIcCCg&s' },
+  { id: 2006, title: 'White Shirt', price: price(29.9), category: 'men', description: 'Classic shirt.', image: 'https://www.henbury.com/wp-content/uploads/2018/04/Untitled-design-2.png' },
+  { id: 2007, title: 'Light Jacket', price: price(79.9), category: 'men', description: 'Everyday jacket.', image: 'https://vstyleformen.com/wp-content/uploads/2021/07/PETER-MILLAR-Suffolk-Quilted-Car-Coat-.jpg' },
+  { id: 2008, title: 'White T-shirt', price: price(19.9), category: 'men', description: 'Basic tee.', image: 'https://us.mavi.com/cdn/shop/products/16f72a23b4da1d09b449d2d22447d85ae11eb7d0836762af99ca6ad2609bfac1.jpg?v=1745342012' },
 
   // -------------------------
-  // KIDS - GIRLS (10)
+  // KIDS - GIRLS
   // -------------------------
-  {
-    id: 3001,
-    title: 'Kids Girls Sweatshirt - Pink',
-    price: price(19.9),
-    category: 'kids-girls',
-    description: 'Soft sweatshirt for everyday play. Comfortable fit with clean finish.',
-    image: img('kids-girls-3001'),
-  },
-  {
-    id: 3002,
-    title: 'Kids Girls Leggings - Black',
-    price: price(12.9),
-    category: 'kids-girls',
-    description: 'Stretch leggings designed for movement. Easy to pair with tees and sweatshirts.',
-    image: img('kids-girls-3002'),
-  },
-  {
-    id: 3003,
-    title: 'Kids Girls Dress - Floral',
-    price: price(24.9),
-    category: 'kids-girls',
-    description: 'Light dress with a comfortable shape for daily wear and special moments.',
-    image: img('kids-girls-3003'),
-  },
-  {
-    id: 3004,
-    title: 'Kids Girls Denim Jacket - Light Blue',
-    price: price(29.9),
-    category: 'kids-girls',
-    description: 'Classic denim jacket in a light wash. Durable layer for changing weather.',
-    image: img('kids-girls-3004'),
-  },
-  {
-    id: 3005,
-    title: 'Kids Girls Cardigan - Cream',
-    price: price(21.9),
-    category: 'kids-girls',
-    description: 'Soft cardigan with ribbed trims. Ideal for layering in cooler days.',
-    image: img('kids-girls-3005'),
-  },
-  {
-    id: 3006,
-    title: 'Kids Girls Skirt - Navy',
-    price: price(16.9),
-    category: 'kids-girls',
-    description: 'Simple skirt with an elastic waistband. Easy movement and styling.',
-    image: img('kids-girls-3006'),
-  },
-  {
-    id: 3007,
-    title: 'Kids Girls T-shirt - White',
-    price: price(9.9),
-    category: 'kids-girls',
-    description: 'Everyday tee in soft cotton. Clean shape and comfortable neckline.',
-    image: img('kids-girls-3007'),
-  },
-  {
-    id: 3008,
-    title: 'Kids Girls Puffer Vest - Lilac',
-    price: price(34.9),
-    category: 'kids-girls',
-    description: 'Light puffer vest for warmth without bulk. Perfect for layering.',
-    image: img('kids-girls-3008'),
-  },
-  {
-    id: 3009,
-    title: 'Kids Girls Sneakers - White',
-    price: price(24.9),
-    category: 'kids-girls',
-    description: 'Comfort sneakers for daily use. Easy fit for active days.',
-    image: img('kids-girls-3009'),
-  },
-  {
-    id: 3010,
-    title: 'Kids Girls Hoodie - Grey',
-    price: price(22.9),
-    category: 'kids-girls',
-    description: 'Soft hoodie with a simple, clean look. Ideal for school and weekends.',
-    image: img('kids-girls-3010'),
-  },
+  { id: 3001, title: ' Sweatshirt', price: price(19.9), category: 'kids-girls', description: 'Soft sweatshirt.', image: 'https://target.scene7.com/is/image/Target/GUEST_c47f00af-ef9f-44ff-90a7-95a1d082a21a' },
+  { id: 3002, title: ' Leggings', price: price(12.9), category: 'kids-girls', description: 'Stretch leggings.', image: 'https://cdn.accentuate.io/7305192177708/1723752810571/ParisianIcons_Legging_2.jpg?v=1723752810571?odnHeight=117&odnWidth=117&odnBg=FFFFFF' },
+  { id: 3003, title: ' Dress', price: price(24.9), category: 'kids-girls', description: 'Light dress.', image: 'https://i5.walmartimages.com/seo/Girl-Dresses-New-Long-Sleeve-Solid-Ruffled-High-Waist-Swing-Dresses-Girls-Dress-Light-Blue-10-11-Years_3d508b33-49a3-425a-aeb1-7c5915ccff04.422daf7d020917dac1350beb3e7bdbcd.jpeg?odnHeight=768&odnWidth=768&odnBg=FFFFFF' },
+  { id: 3004, title: 'Denim Jacket', price: price(29.9), category: 'kids-girls', description: 'Blue denim jacket.', image: 'https://img01.ztat.net/article/spp-media-p1/fb0b3ad7ed574468bfe0bc5631b6f0e6/ab8bf61995bd41fbb417c521a9b68e2f.jpg?imwidth=1800' },
+  { id: 3005, title: ' T-shirt', price: price(9.9), category: 'kids-girls', description: 'Everyday tee.', image: 'https://dfcdn.defacto.com.tr/7/E1034A8_25SM_ER85_01_01.jpg' },
+  { id: 3006, title: 'Sneakers', price: price(24.9), category: 'kids-girls', description: 'Comfort shoes.', image: 'https://img.kwcdn.com/product/fancy/3ce39bdf-0d1f-4709-8c8e-4cd76ed2cabb.jpg?imageMogr2/auto-orient%7CimageView2/2/w/800/q/70/format/webp' },
+  { id: 3007, title: 'Hoodie', price: price(22.9), category: 'kids-girls', description: 'Warm hoodie.', image: 'https://m.media-amazon.com/images/I/41p3KWaNmEL.jpg' },
 
   // -------------------------
-  // KIDS - BOYS (10)
+  // KIDS - BOYS
   // -------------------------
-  {
-    id: 4001,
-    title: 'Kids Boys Sweatshirt - Blue',
-    price: price(19.9),
-    category: 'kids-boys',
-    description: 'Soft sweatshirt for everyday play. Comfortable fit with clean finish.',
-    image: img('kids-boys-4001'),
-  },
-  {
-    id: 4002,
-    title: 'Kids Boys Joggers - Grey',
-    price: price(16.9),
-    category: 'kids-boys',
-    description: 'Comfort joggers with elastic waistband. Designed for movement and comfort.',
-    image: img('kids-boys-4002'),
-  },
-  {
-    id: 4003,
-    title: 'Kids Boys Denim Jeans - Dark Blue',
-    price: price(22.9),
-    category: 'kids-boys',
-    description: 'Durable denim jeans for daily wear. Comfortable fit with modern look.',
-    image: img('kids-boys-4003'),
-  },
-  {
-    id: 4004,
-    title: 'Kids Boys Hoodie - Black',
-    price: price(22.9),
-    category: 'kids-boys',
-    description: 'Soft hoodie with a clean silhouette. Great for school and weekends.',
-    image: img('kids-boys-4004'),
-  },
-  {
-    id: 4005,
-    title: 'Kids Boys T-shirt - White',
-    price: price(9.9),
-    category: 'kids-boys',
-    description: 'Everyday tee in soft cotton. Clean neckline and comfortable fit.',
-    image: img('kids-boys-4005'),
-  },
-  {
-    id: 4006,
-    title: 'Kids Boys Shirt - Light Blue',
-    price: price(18.9),
-    category: 'kids-boys',
-    description: 'Light button-up shirt for a smart-casual look. Comfortable and breathable.',
-    image: img('kids-boys-4006'),
-  },
-  {
-    id: 4007,
-    title: 'Kids Boys Puffer Jacket - Navy',
-    price: price(39.9),
-    category: 'kids-boys',
-    description: 'Warm puffer jacket for colder days. Lightweight feel with comfortable fit.',
-    image: img('kids-boys-4007'),
-  },
-  {
-    id: 4008,
-    title: 'Kids Boys Shorts - Sand',
-    price: price(14.9),
-    category: 'kids-boys',
-    description: 'Casual shorts for warmer days. Easy to wear, easy to move in.',
-    image: img('kids-boys-4008'),
-  },
-  {
-    id: 4009,
-    title: 'Kids Boys Sneakers - Black',
-    price: price(24.9),
-    category: 'kids-boys',
-    description: 'Comfort sneakers for daily use. Easy fit for active days.',
-    image: img('kids-boys-4009'),
-  },
-  {
-    id: 4010,
-    title: 'Kids Boys Overshirt - Olive',
-    price: price(26.9),
-    category: 'kids-boys',
-    description: 'Light overshirt with pockets. A simple layer for transitional weather.',
-    image: img('kids-boys-4010'),
-  },
+  { id: 4001, title: 'Sweatshirt', price: price(19.9), category: 'kids-boys', description: 'Soft sweatshirt.', image: 'https://i5.walmartimages.com/seo/Kids-Boys-Hoodies-Kids-White-Zipper-Hoodie-Long-Sleeve-Soft-Sweatshirts-Top-Fall-Clothes-Girls-Size-7-8-Years-Clothes-Cute-nbsp-Boy-Girl-nbsp-Clothin_60fe58fd-e9d6-481b-bcfd-e5c8bfe3e4b9.41fc9abf32e1476deae2a62abeaf1820.jpeg' },
+  { id: 4002, title: 'Joggers', price: price(16.9), category: 'kids-boys', description: 'Comfort pants.', image: 'https://oldnavy.gap.com/webcontent/0055/771/624/cn55771624.jpg' },
+  { id: 4003, title: 'Denim Jeans', price: price(22.9), category: 'kids-boys', description: 'Daily jeans.', image: 'https://assets.theplace.com/image/upload/v1/ecom/assets/products/gym/3058241/3058241_33PN.jpg' },
+  { id: 4004, title: 'Black Hoodie', price: price(22.9), category: 'kids-boys', description: 'Simple hoodie.', image: 'https://n.nordstrommedia.com/it/f3682cc9-14bd-45f4-9eb4-880a441a918c.jpeg?h=368&w=240&dpr=2' },
+  { id: 4005, title: 'T-shirt', price: price(9.9), category: 'kids-boys', description: 'Basic tee.', image: 'https://www.bellacanvas.com/bella/product/large/3010y_2.jpg' },
+  { id: 4006, title: 'Blue Shirt', price: price(18.9), category: 'kids-boys', description: 'Button shirt.', image: 'https://cdn.shopify.com/s/files/1/0550/5767/8581/files/black-dress-shirt_1.jpg?v=1725380629' },
+  { id: 4007, title: 'Sneakers', price: price(24.9), category: 'kids-boys', description: 'Daily sneakers.', image: 'https://static.nike.com/a/images/t_web_pw_592_v2/f_auto/b8464c8b-944d-442e-92be-988ad46e1a87/NIKE+V5+RNR+%28GS%29.png' },
 ]

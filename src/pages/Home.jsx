@@ -167,15 +167,7 @@ export default function Home() {
               </p>
             </div>
 
-            <div className="flex w-full md:w-auto gap-3">
-              <input
-                placeholder="Email address"
-                className="flex-1 md:w-80 border border-gray-300 px-4 py-3 text-sm bg-white focus:outline-none focus:border-gray-500"
-              />
-              <button className="bg-black text-white px-6 py-3 text-sm uppercase tracking-[0.2em] hover:bg-gray-800 transition">
-                Subscribe
-              </button>
-            </div>
+       
           </div>
         </div>
       </section>

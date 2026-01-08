@@ -1,56 +1,28 @@
 import { useEffect, useMemo, useState } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import ProductGrid from '../components/product/ProductGrid'
 import ProductSkeleton from '../components/product/ProductSkeleton'
-import { getCategories, getProducts, getProductsByCategory } from '../api/products.api'
-
-function labelCategory(c) {
-  const v = String(c || '').toLowerCase()
-  if (v === 'women') return 'Women'
-  if (v === 'men') return 'Men'
-  if (v === 'kids-girls') return 'Kids – Girls'
-  if (v === 'kids-boys') return 'Kids – Boys'
-  // fallback for API-provided categories
-  return String(c || '')
-    .replace(/[-_]/g, ' ')
-    .replace(/\b\w/g, (m) => m.toUpperCase())
-}
+import { getProducts } from '../api/products.api'
 
 function isKidsCategory(c) {
-  const v = String(c || '').toLowerCase()
-  return v.startsWith('kids')
+  return String(c || '').toLowerCase().startsWith('kids')
 }
 
 export default function Shop() {
-  const [categories, setCategories] = useState([])
-  const [selectedCategory, setSelectedCategory] = useState('all')
-  const [group, setGroup] = useState('all') // all | adults | kids
+  const [searchParams] = useSearchParams()
+
+  // URL params from navbar
+  const query = (searchParams.get('q') || '').trim()
+  const cat = (searchParams.get('cat') || 'all').trim()      // women | men | kids-girls | kids-boys | all
+  const group = (searchParams.get('group') || 'all').trim()  // kids | adults | all
 
   const [products, setProducts] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
 
-  const [query, setQuery] = useState('')
   const [sort, setSort] = useState('featured') // featured | price-asc | price-desc | title-asc
 
-  // Load categories once
-  useEffect(() => {
-    let alive = true
-    ;(async () => {
-      try {
-        const data = await getCategories()
-        if (!alive) return
-        setCategories(Array.isArray(data) ? data : [])
-      } catch (e) {
-        if (!alive) return
-        setCategories([])
-      }
-    })()
-    return () => {
-      alive = false
-    }
-  }, [])
-
-  // Load products when category changes
+  // Load all products once
   useEffect(() => {
     let alive = true
     setLoading(true)
@@ -58,11 +30,7 @@ export default function Shop() {
 
     ;(async () => {
       try {
-        const data =
-          selectedCategory === 'all'
-            ? await getProducts()
-            : await getProductsByCategory(selectedCategory)
-
+        const data = await getProducts()
         if (!alive) return
         setProducts(Array.isArray(data) ? data : [])
       } catch (e) {
@@ -78,35 +46,57 @@ export default function Shop() {
     return () => {
       alive = false
     }
-  }, [selectedCategory])
+  }, [])
 
-  const groupFilteredProducts = useMemo(() => {
-    if (group === 'all') return products
-    if (group === 'kids') return products.filter(p => isKidsCategory(p.category))
-    if (group === 'adults') return products.filter(p => !isKidsCategory(p.category))
-    return products
-  }, [products, group])
-
-  // Filter + sort client-side
+  // Filter + sort based on URL params
   const visibleProducts = useMemo(() => {
-    const q = query.trim().toLowerCase()
+    let list = products
 
-    let list = groupFilteredProducts
+    // 1) Apply category filter
+    if (cat !== 'all') {
+      if (cat === 'kids') {
+        // if someone uses /shop?cat=kids (optional support)
+        list = list.filter((p) => isKidsCategory(p.category))
+      } else {
+        list = list.filter((p) => String(p.category || '').toLowerCase() === cat.toLowerCase())
+      }
+    }
+
+    // 2) Apply group filter (kids/adults)
+    if (group !== 'all') {
+      if (group === 'kids') list = list.filter((p) => isKidsCategory(p.category))
+      if (group === 'adults') list = list.filter((p) => !isKidsCategory(p.category))
+    }
+
+    // 3) Apply search (q)
+    const q = query.toLowerCase()
     if (q) {
-      list = list.filter(p => {
+      list = list.filter((p) => {
         const title = String(p?.title || '').toLowerCase()
         const category = String(p?.category || '').toLowerCase()
         return title.includes(q) || category.includes(q)
       })
     }
 
+    // 4) Sort
     const sorted = [...list]
     if (sort === 'price-asc') sorted.sort((a, b) => (a.price || 0) - (b.price || 0))
     if (sort === 'price-desc') sorted.sort((a, b) => (b.price || 0) - (a.price || 0))
-    if (sort === 'title-asc') sorted.sort((a, b) => String(a.title || '').localeCompare(String(b.title || '')))
+    if (sort === 'title-asc') {
+      sorted.sort((a, b) => String(a.title || '').localeCompare(String(b.title || '')))
+    }
 
     return sorted
-  }, [groupFilteredProducts, query, sort])
+  }, [products, cat, group, query, sort])
+
+  // Nice label for the current filter state (optional)
+  const filterLabel = useMemo(() => {
+    const parts = []
+    if (group !== 'all') parts.push(group.toUpperCase())
+    if (cat !== 'all') parts.push(cat.toUpperCase())
+    if (query) parts.push(`"${query}"`)
+    return parts.length ? parts.join(' · ') : null
+  }, [cat, group, query])
 
   return (
     <div className="max-w-7xl mx-auto px-6 py-10">
@@ -114,72 +104,34 @@ export default function Shop() {
         <div>
           <h1 className="text-2xl font-semibold tracking-tight">Shop</h1>
           <p className="mt-2 text-sm text-gray-600">
-            Filter by Adults/Kids and category, then refine with search and sorting.
+            Browse products and sort results. Use the navbar links and search to filter.
           </p>
+
+          {filterLabel ? (
+            <p className="mt-3 text-xs uppercase tracking-[0.25em] text-gray-500">
+              {filterLabel}
+            </p>
+          ) : null}
         </div>
 
-   {/* Controls */}
-<div className="w-full md:w-auto">
-  <div className="mt-2 md:mt-0 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
-    {/* Group */}
-    <div className="border border-gray-200 bg-white p-3">
-      <p className="text-[11px] uppercase tracking-[0.25em] text-gray-500">Group</p>
-      <select
-        value={group}
-        onChange={(e) => setGroup(e.target.value)}
-        className="mt-2 w-full border border-gray-300 px-3 py-2 text-sm bg-white focus:outline-none focus:border-gray-500"
-      >
-        <option value="all">All</option>
-        <option value="adults">Adults</option>
-        <option value="kids">Kids</option>
-      </select>
-    </div>
-
-    {/* Category */}
-    <div className="border border-gray-200 bg-white p-3">
-      <p className="text-[11px] uppercase tracking-[0.25em] text-gray-500">Category</p>
-      <select
-        value={selectedCategory}
-        onChange={(e) => setSelectedCategory(e.target.value)}
-        className="mt-2 w-full border border-gray-300 px-3 py-2 text-sm bg-white focus:outline-none focus:border-gray-500"
-      >
-        <option value="all">All</option>
-        {categories.map((c) => (
-          <option key={c} value={c}>
-            {labelCategory(c)}
-          </option>
-        ))}
-      </select>
-    </div>
-
-    {/* Search */}
-    <div className="border border-gray-200 bg-white p-3 sm:col-span-2 lg:col-span-1">
-      <p className="text-[11px] uppercase tracking-[0.25em] text-gray-500">Search</p>
-      <input
-        value={query}
-        onChange={(e) => setQuery(e.target.value)}
-        placeholder="Search products..."
-        className="mt-2 w-full border border-gray-300 px-3 py-2 text-sm bg-white focus:outline-none focus:border-gray-500"
-      />
-    </div>
-
-    {/* Sort */}
-    <div className="border border-gray-200 bg-white p-3">
-      <p className="text-[11px] uppercase tracking-[0.25em] text-gray-500">Sort</p>
-      <select
-        value={sort}
-        onChange={(e) => setSort(e.target.value)}
-        className="mt-2 w-full border border-gray-300 px-3 py-2 text-sm bg-white focus:outline-none focus:border-gray-500"
-      >
-        <option value="featured">Featured</option>
-        <option value="price-asc">Price: Low to High</option>
-        <option value="price-desc">Price: High to Low</option>
-        <option value="title-asc">Title: A to Z</option>
-      </select>
-    </div>
-  </div>
-</div>
-
+        {/* Controls — SORT ONLY */}
+        <div className="w-full md:w-auto">
+          <div className="mt-2 md:mt-0 grid grid-cols-1 gap-3">
+            <div className="border border-gray-200 bg-white p-3">
+              <p className="text-[11px] uppercase tracking-[0.25em] text-gray-500">Sort</p>
+              <select
+                value={sort}
+                onChange={(e) => setSort(e.target.value)}
+                className="mt-2 w-full border border-gray-300 px-3 py-2 text-sm bg-white focus:outline-none focus:border-gray-500"
+              >
+                <option value="featured">Featured</option>
+                <option value="price-asc">Price: Low to High</option>
+                <option value="price-desc">Price: High to Low</option>
+                <option value="title-asc">Title: A to Z</option>
+              </select>
+            </div>
+          </div>
+        </div>
       </div>
 
       {/* Status */}

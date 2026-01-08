@@ -1,4 +1,5 @@
-import { Routes, Route, Navigate } from 'react-router-dom'
+import { Routes, Route, Navigate, useLocation } from 'react-router-dom'
+import { useEffect } from 'react'
 
 import Navbar from './components/layout/Navbar'
 import Footer from './components/layout/Footer'
@@ -8,9 +9,23 @@ import Shop from './pages/Shop'
 import Product from './pages/Product'
 import Cart from './pages/Cart'
 
+function ScrollToTop() {
+  const { pathname, search } = useLocation()
+
+  useEffect(() => {
+    // Scroll to top on route change (including query string changes)
+    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
+  }, [pathname, search])
+
+  return null
+}
+
 export default function App() {
   return (
     <div className="min-h-screen flex flex-col bg-white text-black">
+      {/* Scroll restore */}
+      <ScrollToTop />
+
       {/* Top Navigation */}
       <Navbar />
 

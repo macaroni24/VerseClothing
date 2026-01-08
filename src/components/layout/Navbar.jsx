@@ -103,7 +103,7 @@ export default function Navbar() {
 
         {/* Brand */}
         <Link to="/" onClick={closeAll} className="text-xl font-semibold tracking-wide">
-          CLOTHES
+          VerseClothes
         </Link>
 
         {/* Desktop nav */}
@@ -229,7 +229,7 @@ export default function Navbar() {
             </div>
 
             <div className="mt-6 pt-6 border-t border-gray-800 text-xs text-gray-500">
-              <p className="uppercase tracking-[0.25em]">CLOTHES</p>
+              <p className="uppercase tracking-[0.25em]">Verse CLOTHES</p>
               <p className="mt-2 leading-5">
                 Minimal storefront. Mobile menu is slide-down for fast navigation.
               </p>
