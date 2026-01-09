@@ -1,4 +1,7 @@
-export default function CartSummary({ subtotal = 0, onCheckout }) {
+import { useNavigate } from 'react-router-dom'
+
+export default function CartSummary({ subtotal = 0 }) {
+  const navigate = useNavigate()
   const total = Math.round(Number(subtotal || 0) * 100) / 100
 
   return (
@@ -24,14 +27,14 @@ export default function CartSummary({ subtotal = 0, onCheckout }) {
 
       <button
         type="button"
-        onClick={onCheckout}
+        onClick={() => navigate('/checkout')}
         className="mt-6 w-full bg-black text-white px-6 py-3 text-sm uppercase tracking-wide hover:bg-gray-800 transition"
       >
         Checkout
       </button>
 
       <p className="mt-4 text-xs text-gray-500">
-        Checkout is UI-only for now.
+        Cash on delivery for now.
       </p>
     </aside>
   )

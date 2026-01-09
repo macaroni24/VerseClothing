@@ -37,14 +37,13 @@ export default function Cart() {
           <div className="lg:col-span-2">
             <div className="border border-gray-200">
               {items.map((x) => (
-                <div key={`${x.id}-${x.selectedSize || 'nosize'}`} className="p-5 border-b border-gray-200 last:border-b-0">
+                <div
+                  key={`${x.id}-${x.selectedSize || 'nosize'}`}
+                  className="p-5 border-b border-gray-200 last:border-b-0"
+                >
                   <div className="flex gap-4">
                     <div className="w-24 h-32 bg-gray-100 overflow-hidden border border-gray-200">
-                      <img
-                        src={x.image}
-                        alt={x.title}
-                        className="w-full h-full object-cover"
-                      />
+                      <img src={x.image} alt={x.title} className="w-full h-full object-cover" />
                     </div>
 
                     <div className="flex-1">
@@ -52,7 +51,8 @@ export default function Cart() {
                         <div>
                           <p className="text-sm font-medium leading-5">{x.title}</p>
                           <p className="mt-2 text-xs uppercase tracking-[0.2em] text-gray-500">
-                            {x.category}{x.selectedSize ? ` • Size ${x.selectedSize}` : ''}
+                            {x.category}
+                            {x.selectedSize ? ` • Size ${x.selectedSize}` : ''}
                           </p>
                         </div>
 
@@ -66,7 +66,9 @@ export default function Cart() {
                           </label>
                           <select
                             value={x.quantity}
-                            onChange={(e) => setQty(x.id, x.selectedSize || null, Number(e.target.value))}
+                            onChange={(e) =>
+                              setQty(x.id, x.selectedSize || null, Number(e.target.value))
+                            }
                             className="border border-gray-300 px-3 py-2 text-sm bg-white"
                           >
                             {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((n) => (
@@ -89,7 +91,7 @@ export default function Cart() {
                       <div className="mt-4 text-sm text-gray-600">
                         Line total:{' '}
                         <span className="text-gray-900 font-medium">
-                          ${Number(x.price || 0) * Number(x.quantity || 0)}
+                          ${(Number(x.price || 0) * Number(x.quantity || 0)).toFixed(2)}
                         </span>
                       </div>
                     </div>
@@ -107,10 +109,7 @@ export default function Cart() {
                 Clear cart
               </button>
 
-              <Link
-                to="/shop"
-                className="text-sm uppercase tracking-wide hover:text-gray-500"
-              >
+              <Link to="/shop" className="text-sm uppercase tracking-wide hover:text-gray-500">
                 Add more
               </Link>
             </div>
@@ -123,7 +122,7 @@ export default function Cart() {
             <div className="mt-6 space-y-3 text-sm">
               <div className="flex items-center justify-between">
                 <span className="text-gray-600">Subtotal</span>
-                <span className="font-medium">${Math.round(subtotal * 100) / 100}</span>
+                <span className="font-medium">${(Math.round(subtotal * 100) / 100).toFixed(2)}</span>
               </div>
 
               <div className="flex items-center justify-between">
@@ -133,19 +132,20 @@ export default function Cart() {
 
               <div className="pt-4 border-t border-gray-200 flex items-center justify-between">
                 <span className="text-gray-600">Total</span>
-                <span className="font-semibold">${Math.round(subtotal * 100) / 100}</span>
+                <span className="font-semibold">${(Math.round(subtotal * 100) / 100).toFixed(2)}</span>
               </div>
             </div>
 
-            <button
-              type="button"
-              className="mt-6 w-full bg-black text-white px-6 py-3 text-sm uppercase tracking-wide hover:bg-gray-800 transition"
+            {/* ✅ CHANGED: button -> Link so it navigates */}
+            <Link
+              to="/checkout"
+              className="mt-6 w-full bg-black text-white px-6 py-3 text-sm uppercase tracking-wide hover:bg-gray-800 transition inline-flex items-center justify-center"
             >
               Checkout
-            </button>
+            </Link>
 
             <p className="mt-4 text-xs text-gray-500">
-              Checkout is UI-only for now. Next we can integrate a real payments/checkout API.
+              Checkout is UI-only for now.
             </p>
           </aside>
         </div>

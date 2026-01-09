@@ -3,7 +3,7 @@ import { useEffect } from 'react'
 
 import Navbar from './components/layout/Navbar'
 import Footer from './components/layout/Footer'
-
+import Checkout from './pages/Checkout'
 import Home from './pages/Home'
 import Shop from './pages/Shop'
 import Product from './pages/Product'
@@ -32,6 +32,7 @@ export default function App() {
       {/* Page Content */}
       <main className="flex-1">
         <Routes>
+          <Route path="/checkout" element={<Checkout />} />
           <Route path="/" element={<Home />} />
           <Route path="/shop" element={<Shop />} />
           <Route path="/product/:id" element={<Product />} />
@@ -51,6 +52,7 @@ export default function App() {
           />
 
           {/* Catch-all */}
+          
           <Route path="*" element={<Navigate to="/404" replace />} />
         </Routes>
       </main>
