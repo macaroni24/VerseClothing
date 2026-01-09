@@ -368,6 +368,12 @@ export default function Navbar() {
             <span className="text-[12px]">Home</span>
           </NavLink>
 
+       <NavLink to="/shop" onClick={closeMobileOverlays} className={bottomItemClass}>
+            <ShopIcon />
+            <span className="text-[12px]">Shop</span>
+          </NavLink>
+
+
           <button
             type="button"
             onClick={() => setCategoriesOpen((v) => !v)}
@@ -378,6 +384,7 @@ export default function Navbar() {
             <span className="text-[12px]">Categories</span>
           </button>
 
+  
           <NavLink to="/cart" onClick={closeMobileOverlays} className={bottomItemClass}>
             <span className="relative">
               <CartIcon />
@@ -390,10 +397,7 @@ export default function Navbar() {
             <span className="text-[12px]">Cart</span>
           </NavLink>
 
-          <NavLink to="/shop" onClick={closeMobileOverlays} className={bottomItemClass}>
-            <ShopIcon />
-            <span className="text-[12px]">Shop</span>
-          </NavLink>
+        
         </div>
       </div>
     </>
@@ -438,6 +442,21 @@ function MenuIcon() {
   )
 }
 
+function ShopIcon() {
+  return (
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" className="text-current">
+      <path
+        d="M4 9l2-5h12l2 5v11a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V9z"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinejoin="round"
+      />
+      <path d="M4 9h16" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+      <path d="M9 9a3 3 0 0 0 6 0" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+    </svg>
+  )
+}
+
 function CartIcon() {
   return (
     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" className="text-current">
@@ -454,17 +473,4 @@ function CartIcon() {
   )
 }
 
-function ShopIcon() {
-  return (
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" className="text-current">
-      <path
-        d="M4 9l2-5h12l2 5v11a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V9z"
-        stroke="currentColor"
-        strokeWidth="1.8"
-        strokeLinejoin="round"
-      />
-      <path d="M4 9h16" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
-      <path d="M9 9a3 3 0 0 0 6 0" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
-    </svg>
-  )
-}
+
