@@ -25,7 +25,7 @@ export default function Home() {
                 <h1 className="mt-3 sm:mt-4 text-4xl sm:text-5xl md:text-6xl font-semibold tracking-tight text-white max-w-3xl">
                   Modern silhouettes, everyday pieces.
                 </h1>
-                
+
                 <div className="mt-7 sm:mt-8 flex flex-col sm:flex-row gap-3">
                   <Link
                     to="/shop"
@@ -41,13 +41,7 @@ export default function Home() {
                   </Link>
                 </div>
 
-                {/* Quick chips (mobile-friendly) */}
-                <div className="mt-6 flex flex-wrap gap-2">
-                  <Chip to="/shop?cat=women">Women</Chip>
-                  <Chip to="/shop?cat=men">Men</Chip>
-                  <Chip to="/shop?group=kids">Kids</Chip>
-                  <Chip to="/shop?group=adults">Adults</Chip>
-                </div>
+             
               </div>
             </div>
           </div>
