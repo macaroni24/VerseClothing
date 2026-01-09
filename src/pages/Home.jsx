@@ -33,12 +33,7 @@ export default function Home() {
                   >
                     Shop now
                   </Link>
-                  <Link
-                    to="/shop?group=kids"
-                    className="inline-flex items-center justify-center border border-white/70 text-white px-7 py-3 text-sm uppercase tracking-[0.2em] hover:border-white transition"
-                  >
-                    Kids collection
-                  </Link>
+               
                 </div>
 
              
@@ -50,6 +45,9 @@ export default function Home() {
 
       {/* FEATURED CATEGORIES (cleaner, more responsive) */}
       <section className="bg-white">
+
+
+        
         <div className="max-w-7xl mx-auto px-5 sm:px-6 py-12 sm:py-14">
           <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6">
             <div>
