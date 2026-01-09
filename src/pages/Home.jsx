@@ -25,12 +25,7 @@ export default function Home() {
                 <h1 className="mt-3 sm:mt-4 text-4xl sm:text-5xl md:text-6xl font-semibold tracking-tight text-white max-w-3xl">
                   Modern silhouettes, everyday pieces.
                 </h1>
-
-                <p className="mt-4 sm:mt-5 text-sm sm:text-base text-white/85 max-w-2xl leading-6">
-                  A clean, editorial storefront inspired by fashion retailers. Discover Women, Men,
-                  and Kids collections designed for daily rotation.
-                </p>
-
+                
                 <div className="mt-7 sm:mt-8 flex flex-col sm:flex-row gap-3">
                   <Link
                     to="/shop"
